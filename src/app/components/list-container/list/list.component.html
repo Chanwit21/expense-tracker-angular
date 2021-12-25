@@ -1,0 +1,45 @@
+<li
+  class="
+    list-group-item
+    d-flex
+    justify-content-between
+    align-items-center
+    bd-callout bd-callout-danger
+  "
+>
+  <div class="transaction-detail d-flex flex-fill me-4">
+    <div
+      class="
+        transaction-date-card
+        border border-1 border-dark
+        rounded-2
+        bg-warning
+        p-2
+        text-center
+      "
+    >
+      <p class="p-0 m-0 fs-7 text-black-50">{{ getDateMonth() }}</p>
+      <p class="p-0 m-0">{{ getDateOnly() }}</p>
+    </div>
+    <div
+      class="d-flex justify-content-between align-items-center flex-fill ps-4"
+    >
+      <div>
+        <p class="mb-1 f-5 fw-bold">{{ transaction.payee }}</p>
+        <p class="mb-0 text-black-50 fs-7">{{ transaction.category.title }}</p>
+      </div>
+      <span
+        class="badge bg-danger"
+        [ngClass]="{
+          badge: true,
+          'bg-danger': this.transaction.category.type === 'EXPENSE',
+          'bg-success': this.transaction.category.type !== 'EXPENSE'
+        }"
+        >{{ getPrice() }}</span
+      >
+    </div>
+  </div>
+  <button class="btn btn-link text-secondary p-0 border-0">
+    <i class="bi-x-circle"></i>
+  </button>
+</li>

@@ -1,0 +1,50 @@
+<div class="container mw-sm py-4 border bg-white rounded-2 p-3 mt-5">
+  <form class="row g-3">
+    <div class="col-12">
+      <input type="radio" class="btn-check" id="cbx-expense" name="type" />
+      <label
+        class="btn btn-outline-danger rounded-0 rounded-start"
+        htmlFor="cbx-expense"
+      >
+        Expense
+      </label>
+      <input type="radio" class="btn-check" id="cbx-income" name="type" />
+      <label
+        class="btn btn-outline-success rounded-0 rounded-end"
+        htmlFor="cbx-income"
+      >
+        Income
+      </label>
+    </div>
+    <div class="col-sm-6">
+      <label class="form-label">Payee</label>
+      <input type="text" class="form-control" />
+    </div>
+    <div class="col-sm-6">
+      <label class="form-label">Category</label>
+      <select class="form-select">
+        <option>Food</option>
+        <option>Shopping</option>
+        <option>Transport</option>
+        <option>Utilities</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+      <label class="form-label">Amount</label>
+      <input type="text" class="form-control" />
+    </div>
+    <div class="col-sm-6">
+      <label class="form-label">Date</label>
+      <input type="date" class="form-control" />
+    </div>
+    <div class="col-12">
+      <label class="form-label">Comment</label>
+      <textarea class="form-control" rows="3"></textarea>
+    </div>
+    <div class="col-12">
+      <div class="d-grid mt-3">
+        <button class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,51 @@
+<div class="mt-3 d-flex justify-content-between">
+  <div class="d-flex align-items-center mb-3">
+    <div>
+      <select
+        type="text"
+        class="form-select form-select-sm"
+        [ngModel]="limit"
+        (ngModelChange)="handleChangeLimit($event)"
+      >
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <span class="text-white-50 mx-2 fs-7"
+      >Showing {{ limit * (page - 1) + 1 }} to
+      {{ limit * page < count ? limit * page : count }} of
+      {{ count }} transactions</span
+    >
+  </div>
+  <nav>
+    <ul class="pagination pagination-sm">
+      <li [ngClass]="{ 'page-item': true, disabled: page === 1 }">
+        <a href="/" class="page-link" (click)="handleClickPrevPage($event)">
+          <span>&laquo;</span>
+        </a>
+      </li>
+
+      <li
+        [ngClass]="{ 'page-item': true, active: page === p }"
+        *ngFor="let p of genArrayPage()"
+      >
+        <a href="/" class="page-link">
+          <span>{{ p }}</span>
+        </a>
+      </li>
+
+      <li
+        [ngClass]="{
+          'page-item': true,
+          disabled: page === maxPage
+        }"
+      >
+        <a href="/" class="page-link" (click)="handleClickNextPage($event)">
+          <span>&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

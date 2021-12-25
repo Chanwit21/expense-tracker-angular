@@ -1,0 +1,20 @@
+<div class="row g-3">
+  <app-summary-card
+    class="col-sm-4"
+    [text]="'Net Worth'"
+    [bgColor]="'bg-info'"
+    [summary]="summary.networth"
+  ></app-summary-card>
+  <app-summary-card
+    class="col-sm-4"
+    [text]="'Income'"
+    [bgColor]="'bg-success'"
+    [summary]="summary.income"
+  ></app-summary-card>
+  <app-summary-card
+    class="col-sm-4"
+    [text]="'Expense'"
+    [bgColor]="'bg-danger'"
+    [summary]="summary.expense"
+  ></app-summary-card>
+</div>

@@ -1,0 +1,15 @@
+<div class="container mw-sm py-4">
+  <app-expense-summary [summary]="summary"></app-expense-summary>
+
+  <app-filter [search]="search" [month]="month" [year]="year"></app-filter>
+
+  <app-pagination
+    [page]="page"
+    [limit]="limit"
+    (changeLimitEvent)="handleChangeLimit($event)"
+    (changePageEvent)="handleClickNewPage($event)"
+    [count]="countPage"
+  ></app-pagination>
+
+  <app-list-container [transactions]="transactions"></app-list-container>
+</div>

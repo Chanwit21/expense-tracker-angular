@@ -1,0 +1,72 @@
+<div class="mt-4">
+  <div class="row g-3">
+    <div class="col-sm-6">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Enter to search"
+          [value]="search"
+          [ngModel]="search"
+          (ngModelChange)="handleChangeSearch($event)"
+        />
+        <button
+          class="btn btn-sm btn-outline-light"
+          (click)="handleClickClearSearch()"
+        >
+          x
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="input-group">
+        <select
+          class="form-select form-select-sm"
+          [value]="month"
+          [ngModel]="month"
+          (ngModelChange)="handleChangeMonth($event)"
+        >
+          <option value="">Month</option>
+          <option value="01">Jan</option>
+          <option value="02">Feb</option>
+          <option value="03">Mar</option>
+          <option value="04">Apr</option>
+          <option value="05">May</option>
+          <option value="06">Jun</option>
+          <option value="07">Jul</option>
+          <option value="08">Aug</option>
+          <option value="09">Sep</option>
+          <option value="10">Oct</option>
+          <option value="11">Nov</option>
+          <option value="12">Dec</option>
+        </select>
+        <button
+          class="btn btn-sm btn-outline-light"
+          (click)="handleClickClearMonth()"
+        >
+          x
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="input-group">
+        <select
+          class="form-select form-select-sm"
+          [value]="year"
+          [ngModel]="year"
+          (ngModelChange)="handleChangeYear($event)"
+        >
+          <option value="">Year</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </select>
+        <button
+          class="btn btn-sm btn-outline-light"
+          (click)="handleClickClearYear()"
+        >
+          x
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
