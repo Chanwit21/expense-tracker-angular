@@ -1,49 +1,112 @@
 <div class="container mw-sm py-4 border bg-white rounded-2 p-3 mt-5">
-  <form class="row g-3">
+  <form
+    class="row g-3"
+    [formGroup]="expenseForm"
+    (submit)="onSubmitForm($event)"
+  >
     <div class="col-12">
-      <input type="radio" class="btn-check" id="cbx-expense" name="type" />
+      <input
+        type="radio"
+        class="btn-check"
+        id="cbx-expense"
+        name="type"
+        value="EXPENSE"
+        formControlName="type"
+        (change)="handleChangeType($event)"
+      />
       <label
         class="btn btn-outline-danger rounded-0 rounded-start"
-        htmlFor="cbx-expense"
+        for="cbx-expense"
       >
         Expense
       </label>
-      <input type="radio" class="btn-check" id="cbx-income" name="type" />
+      <input
+        type="radio"
+        class="btn-check"
+        id="cbx-income"
+        name="type"
+        value="INCOME"
+        formControlName="type"
+        (change)="handleChangeType($event)"
+      />
       <label
         class="btn btn-outline-success rounded-0 rounded-end"
-        htmlFor="cbx-income"
+        for="cbx-income"
       >
         Income
       </label>
     </div>
     <div class="col-sm-6">
       <label class="form-label">Payee</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="payee"
+        [ngClass]="{ 'is-invalid': !!errorForm.payee }"
+        (ngModelChange)="handleChangeInput('payee')"
+      />
+      <div *ngIf="!!errorForm.payee" class="invalid-feedback">
+        {{ errorForm.payee }}
+      </div>
     </div>
     <div class="col-sm-6">
       <label class="form-label">Category</label>
-      <select class="form-select">
-        <option>Food</option>
-        <option>Shopping</option>
-        <option>Transport</option>
-        <option>Utilities</option>
+      <select class="form-select" formControlName="categoryId">
+        <option
+          *ngFor="
+            let category of expenseForm.value.type === 'EXPENSE'
+              ? expenses
+              : incomes
+          "
+          [value]="category.id"
+        >
+          {{ category.title }}
+        </option>
       </select>
     </div>
     <div class="col-sm-6">
       <label class="form-label">Amount</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="amount"
+        [ngClass]="{ 'is-invalid': !!errorForm.amount }"
+        (ngModelChange)="handleChangeInput('amount')"
+      />
+      <div *ngIf="!!errorForm.amount" class="invalid-feedback">
+        {{ errorForm.amount }}
+      </div>
     </div>
     <div class="col-sm-6">
       <label class="form-label">Date</label>
-      <input type="date" class="form-control" />
+      <input
+        type="date"
+        class="form-control"
+        formControlName="date"
+        [ngClass]="{ 'is-invalid': !!errorForm.date }"
+        (ngModelChange)="handleChangeInput('date')"
+      />
+      <div *ngIf="!!errorForm.date" class="invalid-feedback">
+        {{ errorForm.date }}
+      </div>
     </div>
     <div class="col-12">
       <label class="form-label">Comment</label>
-      <textarea class="form-control" rows="3"></textarea>
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="comment"
+      ></textarea>
     </div>
     <div class="col-12">
       <div class="d-grid mt-3">
-        <button class="btn btn-primary">Save</button>
+        <button
+          class="btn"
+          [ngClass]="[onEdit ? 'btn-primary' : 'btn-success']"
+          type="submit"
+        >
+          Save
+        </button>
       </div>
     </div>
   </form>

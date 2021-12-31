@@ -7,6 +7,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { REST_API } from '../constant';
+import { TransactionTosend } from '../interfaces/TransactionTosend';
 
 @Injectable({
   providedIn: 'root',
@@ -38,12 +39,22 @@ export class TransactionsService {
 
   // Get single object
   getOne(id: any) {
-    return this.httpClient.get(this.API, { headers: this.httpHeaders }).pipe(
-      map((res: any) => {
-        return res || {};
-      }),
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .get(`${this.API}/${id}`, { headers: this.httpHeaders })
+      .pipe(
+        map((res: any) => {
+          return res || {};
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  // //Create
+  createTransaction(data: TransactionTosend): Observable<any> {
+    let API_URL = `${this.API}`;
+    return this.httpClient
+      .post(API_URL, data, { headers: this.httpHeaders })
+      .pipe(catchError(this.handleError));
   }
 
   //Update
@@ -55,7 +66,7 @@ export class TransactionsService {
   }
 
   // Delete
-  deleteBook(id: any): Observable<any> {
+  deleteTransaction(id: any): Observable<any> {
     let API_URL = `${this.API}/${id}`;
     return this.httpClient
       .delete(API_URL, { headers: this.httpHeaders })

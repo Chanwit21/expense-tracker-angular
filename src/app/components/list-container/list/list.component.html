@@ -4,10 +4,18 @@
     d-flex
     justify-content-between
     align-items-center
-    bd-callout bd-callout-danger
+    bd-callout
+  "
+  [ngClass]="
+    transaction.category.type === 'EXPENSE'
+      ? 'bd-callout-danger'
+      : 'bd-callout-warning'
   "
 >
-  <div class="transaction-detail d-flex flex-fill me-4">
+  <div
+    class="transaction-detail d-flex flex-fill me-4"
+    (click)="handleClickToEdit(transaction.id)"
+  >
     <div
       class="
         transaction-date-card
@@ -26,20 +34,26 @@
     >
       <div>
         <p class="mb-1 f-5 fw-bold">{{ transaction.payee }}</p>
-        <p class="mb-0 text-black-50 fs-7">{{ transaction.category.title }}</p>
+        <p class="mb-0 text-black-50 fs-7">
+          {{ transaction.category.title }}
+        </p>
       </div>
       <span
         class="badge bg-danger"
         [ngClass]="{
           badge: true,
-          'bg-danger': this.transaction.category.type === 'EXPENSE',
-          'bg-success': this.transaction.category.type !== 'EXPENSE'
+          'bg-danger': transaction.category.type === 'EXPENSE',
+          'bg-success': transaction.category.type !== 'EXPENSE'
         }"
         >{{ getPrice() }}</span
       >
     </div>
   </div>
-  <button class="btn btn-link text-secondary p-0 border-0">
+
+  <button
+    class="btn btn-link text-secondary p-0 border-0"
+    (click)="deleteTransaction(transaction.id)"
+  >
     <i class="bi-x-circle"></i>
   </button>
 </li>

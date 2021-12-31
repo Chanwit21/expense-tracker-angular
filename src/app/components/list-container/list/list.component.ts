@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Transaction } from 'src/app/interfaces/Transaction';
+import { HomeComponent } from 'src/app/pages/home/home.component';
 
 @Component({
   selector: 'app-list',
@@ -8,17 +10,19 @@ import { Transaction } from 'src/app/interfaces/Transaction';
 })
 export class ListComponent implements OnInit {
   @Input() transaction: Transaction = {
+    id: 0,
     payee: '',
     amount: 0,
     date: new Date(),
     comment: '',
     category: {
+      id: 0,
       title: '',
       type: '',
     },
   };
 
-  constructor() {}
+  constructor(private homeComponent: HomeComponent, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -41,5 +45,13 @@ export class ListComponent implements OnInit {
       currency: 'USD',
       currencyDisplay: 'narrowSymbol',
     }).format(this.transaction.amount);
+  }
+
+  deleteTransaction(id: number) {
+    this.homeComponent.deleteTransaction(id);
+  }
+
+  handleClickToEdit(id: number) {
+    this.router.navigate(['/add-expense', id]);
   }
 }

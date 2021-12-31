@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
       clearTimeout(this.searchTimeOut);
       this.searchTimeOut = setTimeout(() => {
         this.getTransaction();
-      }, 2000);
+      }, 500);
     } else {
       this.getTransaction();
     }
@@ -96,5 +96,14 @@ export class HomeComponent implements OnInit {
   handleChangeYear(newYear: string) {
     this.year = newYear;
     this.getTransaction();
+  }
+
+  deleteTransaction(id: number) {
+    if (window.confirm('Do you want to go ahead?')) {
+      this.transactionService.deleteTransaction(id).subscribe((res) => {
+        alert('Detete Success');
+      });
+      this.getTransaction();
+    }
   }
 }
