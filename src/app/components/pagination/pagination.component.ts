@@ -41,6 +41,11 @@ export class PaginationComponent implements OnInit {
     }
   }
 
+  handleClickPage(e: Event, page: number) {
+    e.preventDefault();
+    this.changePageEvent.emit(page);
+  }
+
   handleClickPrevPage(e: Event) {
     e.preventDefault();
     if (1 < this.page) {

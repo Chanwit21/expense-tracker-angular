@@ -31,7 +31,7 @@
         [ngClass]="{ 'page-item': true, active: page === p }"
         *ngFor="let p of genArrayPage()"
       >
-        <a href="/" class="page-link">
+        <a href="/" class="page-link" (click)="handleClickPage($event, p)">
           <span>{{ p }}</span>
         </a>
       </li>

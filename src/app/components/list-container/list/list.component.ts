@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
   getDateMonth(): any {
     return new Intl.DateTimeFormat('en-US', {
       month: 'short',
-      day: 'numeric',
+      year: '2-digit',
     }).format(new Date(this.transaction.date));
   }
 
