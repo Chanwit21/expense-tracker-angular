@@ -14,7 +14,7 @@ import { TransactionTosend } from '../interfaces/TransactionTosend';
 })
 export class TransactionsService {
   // Node/Epress API
-  API: string = `${REST_API}/transactions`;
+  API: string = `${REST_API}/expense`;
 
   // Http header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');

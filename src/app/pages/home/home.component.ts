@@ -31,9 +31,9 @@ export class HomeComponent implements OnInit {
         this.year
       )
       .subscribe((res: any) => {
-        const { transactions, count } = res;
-        this.transactions = transactions;
-        this.countPage = count.countTransactions;
+        const { expenses, count } = res;
+        this.transactions = expenses;
+        this.countPage = count;
         const [income, expense] = this.transactions.reduce(
           (acc: Array<number>, cur: Transaction): Array<number> => {
             const {
@@ -56,6 +56,16 @@ export class HomeComponent implements OnInit {
         );
         this.summary = { income, expense, networth: income + expense };
       });
+  }
+
+  clearField() {
+    this.limit = 10;
+    this.page = 1;
+    this.countPage = 0;
+    this.search = '';
+    this.month = '';
+    this.year = '';
+    this.searchTimeOut = '';
   }
 
   ngOnInit(): void {
@@ -102,8 +112,8 @@ export class HomeComponent implements OnInit {
     if (window.confirm('Do you want to go ahead?')) {
       this.transactionService.deleteTransaction(id).subscribe((res) => {
         alert('Detete Success');
+        this.getTransaction();
       });
-      this.getTransaction();
     }
   }
 }

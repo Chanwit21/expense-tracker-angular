@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { Cetagory } from 'src/app/interfaces/Cetagory';
+import { Transaction } from 'src/app/interfaces/Transaction';
 import { TransactionTosend } from 'src/app/interfaces/TransactionTosend';
 import { CetagoriesService } from 'src/app/services/cetagories.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
@@ -92,11 +93,12 @@ export class AddExpenseComponent implements OnInit {
                 date,
                 comment,
               } = res;
+
               this.expenseForm.setValue({
                 type: type,
                 payee: payee,
                 amount: amount,
-                date: date,
+                date: date.split('T')[0],
                 comment: comment,
                 categoryId: '' + id,
               });
@@ -124,12 +126,21 @@ export class AddExpenseComponent implements OnInit {
     if (this.formValidate(this.expenseForm)) {
       const { payee, amount, date, comment, categoryId } =
         this.expenseForm.value;
+      const category: Cetagory = (this.expenseForm.value.type === 'EXPENSE'
+        ? this.expenses
+        : this.incomes
+      ).find((item) => item.id === +categoryId) || {
+        id: 0,
+        type: '',
+        title: '',
+      };
+
       const formToSend: TransactionTosend = {
         payee,
         amount,
         date,
         comment,
-        category_id: categoryId,
+        category: category,
       };
 
       if (this.onEdit) {

@@ -12,7 +12,7 @@ import { REST_API } from '../constant';
 })
 export class CetagoriesService {
   // Node/Epress API
-  API: string = `${REST_API}/categories`;
+  API: string = `${REST_API}/category`;
 
   // Http header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
